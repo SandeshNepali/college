@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Task Details</title>
+    <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+</head>
+<body class="bg-gray-100 flex items-center justify-center h-screen">
+    <div class="max-w-lg w-full bg-white p-8 rounded-lg shadow-lg">
+        <h1 class="text-2xl font-bold mb-4">Task Details</h1>
+        <div class="space-y-4">
+            <p><strong>Title:</strong> <span th:text="${task.title}" class="text-gray-700"></span></p>
+            <p><strong>Description:</strong> <span th:text="${task.description}" class="text-gray-700"></span></p>
+            <p><strong>Status:</strong> <span th:text="${task.status}" class="text-gray-700"></span></p>
+            <p><strong>Due Date:</strong> <span th:text="${task.dueDate}" class="text-gray-700"></span></p>
+        </div>
+        <div class="mt-6">
+            <a href="/tasks" class="inline-block bg-blue-600 text-white py-2 px-4 rounded-md hover:bg-blue-500 transition">
+                Back to Task List
+            </a>
+        </div>
+    </div>
+</body>
+</html>
