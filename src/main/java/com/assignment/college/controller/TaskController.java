@@ -21,16 +21,35 @@ public class TaskController {
     private TaskService taskService;
 
     @GetMapping
-    public String getAllTasks(Model model) {
-        List<Task> tasks = taskService.getAllTasks();
-        model.addAttribute("tasks", tasks);
-        return "task-list";
+    public String getAllTasks(HttpSession session, Model model) {
+        User loggedInUser = (User) session.getAttribute("loggedInUser");
+        
+        if (loggedInUser != null) {
+            // Retrieve tasks specific to the logged-in user using the user ID
+            List<Task> tasks = taskService.getTasksByUser(loggedInUser);
+            model.addAttribute("tasks", tasks);
+            return "task-list"; // Returns the task list view
+        }
+    
+        model.addAttribute("user", new User()); // Add empty user object for binding
+        return "login"; // Redirect to the login page if the user is not logged in
     }
+    
 
     @GetMapping("/new")
-    public String showTaskForm(Model model) {
-        model.addAttribute("task", new Task());
-        return "task-form";
+    public String showTaskForm(HttpSession session,Model model) {
+        User loggedInUser = (User) session.getAttribute("loggedInUser");
+        if (loggedInUser != null) {
+            model.addAttribute("task", new Task());
+            return "task-form";
+        }
+        model.addAttribute("user", new User()); // Add empty user object for binding
+        return "login";
+
+
+
+        // model.addAttribute("task", new Task());
+        // return "task-form";
     }
 
     @PostMapping("/save")

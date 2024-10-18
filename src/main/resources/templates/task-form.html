@@ -5,42 +5,57 @@
     <title>Create/Edit Task</title>
     <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
 </head>
-<body class="bg-gray-100 flex items-center justify-center h-screen">
-    <div class="max-w-lg w-full bg-white p-8 rounded-lg shadow-lg">
-        <h1 class="text-2xl font-bold mb-6" th:text="${#strings.isEmpty(task.id) ? 'Create Task' : 'Edit Task'}"></h1>
-        <form th:action="@{/tasks/save}" th:object="${task}" method="post">
-            <input type="hidden" th:field="*{id}" />
-
-            <div class="mb-4">
-                <label class="block text-sm font-medium text-gray-700">Title:</label>
-                <input type="text" th:field="*{title}" required class="mt-1 block w-full p-2 border border-gray-300 rounded-md focus:outline-none focus:ring focus:ring-blue-500" />
-            </div>
-
-            <div class="mb-4">
-                <label class="block text-sm font-medium text-gray-700">Description:</label>
-                <textarea th:field="*{description}" required class="mt-1 block w-full p-2 border border-gray-300 rounded-md focus:outline-none focus:ring focus:ring-blue-500"></textarea>
-            </div>
-
-            <div class="mb-4">
-                <label class="block text-sm font-medium text-gray-700">Status:</label>
-                <select th:field="*{status}" class="mt-1 block w-full p-2 border border-gray-300 rounded-md focus:outline-none focus:ring focus:ring-blue-500">
-                    <option value="pending">Pending</option>
-                    <option value="in-progress">In Progress</option>
-                    <option value="completed">Completed</option>
-                </select>
-            </div>
-
-            <div class="mb-4">
-                <label class="block text-sm font-medium text-gray-700">Due Date:</label>
-                <input type="date" th:field="*{dueDate}" required class="mt-1 block w-full p-2 border border-gray-300 rounded-md focus:outline-none focus:ring focus:ring-blue-500" />
-            </div>
-
+<body class="bg-gray-100">
+    <!-- Navigation Bar -->
+    <nav class="bg-blue-600 p-4">
+        <div class="container mx-auto flex justify-between">
+            <h1 class="text-white text-lg font-bold">Task Manager</h1>
             <div>
-                <button type="submit" class="w-full bg-blue-600 text-white py-2 rounded-md hover:bg-blue-500 transition">
-                    Save Task
-                </button>
+                <a href="/" class="text-white hover:underline px-4">Home</a>
+                <a href="/tasks" class="text-white hover:underline px-4">Task List</a>
+                <a href="/logout" class="text-white hover:underline px-4">Logout</a>
             </div>
-        </form>
+        </div>
+    </nav>
+
+    <!-- Form Container -->
+    <div class="flex items-center justify-center mt-4">
+        <div class="max-w-lg w-full bg-white p-8 rounded-lg shadow-lg">
+            <h1 class="text-2xl font-bold mb-6" th:text="${#strings.isEmpty(task.id) ? 'Create Task' : 'Edit Task'}"></h1>
+            <form th:action="@{/tasks/save}" th:object="${task}" method="post">
+                <input type="hidden" th:field="*{id}" />
+
+                <div class="mb-4">
+                    <label class="block text-sm font-medium text-gray-700">Title:</label>
+                    <input type="text" th:field="*{title}" required class="mt-1 block w-full p-2 border border-gray-300 rounded-md focus:outline-none focus:ring focus:ring-blue-500" />
+                </div>
+
+                <div class="mb-4">
+                    <label class="block text-sm font-medium text-gray-700">Description:</label>
+                    <textarea th:field="*{description}" required class="mt-1 block w-full p-2 border border-gray-300 rounded-md focus:outline-none focus:ring focus:ring-blue-500"></textarea>
+                </div>
+
+                <div class="mb-4">
+                    <label class="block text-sm font-medium text-gray-700">Status:</label>
+                    <select th:field="*{status}" class="mt-1 block w-full p-2 border border-gray-300 rounded-md focus:outline-none focus:ring focus:ring-blue-500">
+                        <option value="pending">Pending</option>
+                        <option value="in-progress">In Progress</option>
+                        <option value="completed">Completed</option>
+                    </select>
+                </div>
+
+                <div class="mb-4">
+                    <label class="block text-sm font-medium text-gray-700">Due Date:</label>
+                    <input type="date" th:field="*{dueDate}" required class="mt-1 block w-full p-2 border border-gray-300 rounded-md focus:outline-none focus:ring focus:ring-blue-500" />
+                </div>
+
+                <div>
+                    <button type="submit" class="w-full bg-blue-600 text-white py-2 rounded-md hover:bg-blue-500 transition">
+                        Save Task
+                    </button>
+                </div>
+            </form>
+        </div>
     </div>
 </body>
 </html>

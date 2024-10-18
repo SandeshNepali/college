@@ -5,7 +5,7 @@ import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 
-@Entity
+@Entity(name = "User")
 public class User {
     
     @Id
@@ -14,13 +14,15 @@ public class User {
     
     private String username;
     private String password;
+    private String email; // New field for email
 
     // Constructors
     public User() {}
 
-    public User(String username, String password) {
+    public User(String username, String password, String email) {
         this.username = username;
         this.password = password;
+        this.email = email; // Initialize email
     }
 
     // Getters and Setters
@@ -39,11 +41,18 @@ public class User {
     }
 
     public String getPassword() {
-        
         return password;
     }
 
     public void setPassword(String password) {
         this.password = password;
+    }
+
+    public String getEmail() {
+        return email; // Getter for email
+    }
+
+    public void setEmail(String email) {
+        this.email = email; // Setter for email
     }
 }
